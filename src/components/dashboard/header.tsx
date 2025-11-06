@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Rocket, Wallet, ChevronDown, LogOut, Network, Loader2 } from "lucide-react";
+import { Rocket, Wallet, ChevronDown, LogOut, Network, Loader2, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -16,17 +16,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAppContext } from "@/contexts/app-context";
 import { cn } from "@/lib/utils";
 
-const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
+const NavLink = ({ href, children, className }: { href: string; children: React.ReactNode, className?: string }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 
   return (
     <Link href={href} className={cn(
       "text-sm font-medium transition-colors hover:text-primary",
-      isActive ? "text-primary" : "text-muted-foreground"
+      isActive ? "text-primary" : "text-muted-foreground",
+      className
     )}>
       {children}
     </Link>
@@ -97,22 +99,30 @@ export function AppHeader() {
     );
   };
 
+  const navLinks = (
+    <>
+      <NavLink href="/" className="text-lg md:text-sm">Dashboard</NavLink>
+      <NavLink href="/proposals" className="text-lg md:text-sm">Proposals</NavLink>
+      <NavLink href="/docs" className="text-lg md:text-sm">Docs</NavLink>
+    </>
+  );
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-7xl items-center justify-between">
+      <div className="container flex h-16 items-center justify-between max-w-7xl">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
             <Rocket className="h-6 w-6 text-primary" />
-            <h1 className="text-xl font-bold">RestakeToGrow</h1>
+            <h1 className="text-lg font-bold md:text-xl">RestakeToGrow</h1>
           </Link>
-          <nav className="hidden md:flex items-center gap-4">
-            <NavLink href="/">Dashboard</NavLink>
-            <NavLink href="/proposals">Proposals</NavLink>
-            <NavLink href="/docs">Docs</NavLink>
-          </nav>
         </div>
+
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks}
+        </nav>
+
         <div className="flex items-center gap-4">
-          <div className="flex items-center space-x-2">
+          <div className="hidden items-center space-x-2 md:flex">
             <Switch
               id="dev-mode"
               checked={isMock}
@@ -120,7 +130,39 @@ export function AppHeader() {
             />
             <Label htmlFor="dev-mode">Dev Mode</Label>
           </div>
-          <WalletButton />
+          <div className="hidden md:block">
+            <WalletButton />
+          </div>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <div className="flex flex-col gap-6 p-6">
+                <Link href="/" className="flex items-center gap-2">
+                  <Rocket className="h-6 w-6 text-primary" />
+                  <h1 className="text-xl font-bold">RestakeToGrow</h1>
+                </Link>
+                <nav className="flex flex-col gap-4">
+                  {navLinks}
+                </nav>
+                <div className="border-t pt-6 space-y-6">
+                  <WalletButton />
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="dev-mode-mobile">Dev Mode</Label>
+                    <Switch
+                      id="dev-mode-mobile"
+                      checked={isMock}
+                      onCheckedChange={setIsMock}
+                    />
+                  </div>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
