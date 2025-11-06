@@ -62,14 +62,37 @@ export function YieldSplit() {
               nameKey="name"
               innerRadius={60}
               strokeWidth={5}
-            >
-              <LabelList
-                dataKey="split"
-                position="inside"
-                formatter={(value: number) => `${value}%`}
-                className="fill-white text-sm font-medium"
-              />
-            </Pie>
+              labelLine={true}
+              label={({
+                cx,
+                cy,
+                midAngle,
+                innerRadius,
+                outerRadius,
+                value,
+                index,
+              }) => {
+                const RADIAN = Math.PI / 180;
+                // eslint-disable-next-line
+                const radius = 25 + innerRadius + (outerRadius - innerRadius);
+                // eslint-disable-next-line
+                const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                // eslint-disable-next-line
+                const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    className="fill-muted-foreground text-xs"
+                    textAnchor={x > cx ? "start" : "end"}
+                    dominantBaseline="central"
+                  >
+                    {chartData[index].name} ({value}%)
+                  </text>
+                );
+              }}
+            />
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
               className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
