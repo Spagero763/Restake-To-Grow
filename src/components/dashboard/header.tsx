@@ -103,7 +103,7 @@ export function AppHeader() {
     <>
       <NavLink href="/" className="text-lg md:text-sm">Dashboard</NavLink>
       <NavLink href="/proposals" className="text-lg md:text-sm">Proposals</NavLink>
-      <NavLink href="/docs" className="text-lg md:text-sm">Docs</NavLink>
+      <NavLink href="/docs" className="text-lg md:text-sm">FAQ's</NavLink>
     </>
   );
 
