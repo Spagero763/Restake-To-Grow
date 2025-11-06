@@ -62,9 +62,6 @@ export function YieldSplit() {
               nameKey="name"
               innerRadius={60}
               strokeWidth={5}
-              label={({ percent, name }) => `${name} ${(percent * 100).toFixed(0)}%`}
-              labelLine={false}
-              className="text-xs"
             />
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
