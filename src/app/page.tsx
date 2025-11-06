@@ -36,7 +36,7 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                     <h3 className="text-xl font-semibold">Featured Proposals</h3>
-                    <Button variant="ghost" asChild>
+                    <Button variant="ghost" asChild className="hover:text-primary">
                         <Link href="/proposals">
                             View All <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
