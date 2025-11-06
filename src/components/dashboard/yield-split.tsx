@@ -1,6 +1,6 @@
 "use client";
 
-import { Pie, PieChart, LabelList } from "recharts";
+import { Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -88,7 +88,7 @@ export function YieldSplit() {
                     textAnchor={x > cx ? "start" : "end"}
                     dominantBaseline="central"
                   >
-                    {chartData[index].name} ({value}%)
+                    {value}%
                   </text>
                 );
               }}
