@@ -37,6 +37,29 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const renderCustomizedLabel = (props: any) => {
+  const { cx, cy, midAngle, outerRadius, percent } = props;
+  const RADIAN = Math.PI / 180;
+  const radius = outerRadius + 20;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  const percentage = (percent * 100).toFixed(0);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="hsl(var(--foreground))"
+      textAnchor={x > cx ? 'start' : 'end'}
+      dominantBaseline="central"
+      className="text-sm"
+    >
+      {`${percentage}%`}
+    </text>
+  );
+};
+
+
 export function YieldSplit() {
   return (
     <Card className="border-border/50 bg-card/60 backdrop-blur-sm">
@@ -61,9 +84,10 @@ export function YieldSplit() {
               dataKey="split"
               nameKey="name"
               innerRadius={60}
+              outerRadius={80}
               strokeWidth={5}
               labelLine={false}
-              label={false}
+              label={renderCustomizedLabel}
             />
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
