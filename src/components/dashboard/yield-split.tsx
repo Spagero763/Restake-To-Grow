@@ -70,7 +70,7 @@ export function YieldSplit() {
                 innerRadius,
                 outerRadius,
                 value,
-                index,
+                name,
               }) => {
                 const RADIAN = Math.PI / 180;
                 // eslint-disable-next-line
@@ -88,7 +88,7 @@ export function YieldSplit() {
                     textAnchor={x > cx ? "start" : "end"}
                     dominantBaseline="central"
                   >
-                    {value}%
+                    {name} ({value}%)
                   </text>
                 );
               }}
