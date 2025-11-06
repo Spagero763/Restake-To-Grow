@@ -62,13 +62,12 @@ export function YieldSplit() {
               nameKey="name"
               innerRadius={60}
               strokeWidth={5}
-              labelLine={false}
             >
               <LabelList
                 dataKey="split"
                 position="inside"
                 formatter={(value: number) => `${value}%`}
-                className="fill-primary-foreground text-sm font-medium"
+                className="fill-white text-sm font-medium"
               />
             </Pie>
             <ChartLegend
