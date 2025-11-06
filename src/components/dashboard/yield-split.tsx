@@ -62,36 +62,8 @@ export function YieldSplit() {
               nameKey="name"
               innerRadius={60}
               strokeWidth={5}
-              labelLine={true}
-              label={({
-                cx,
-                cy,
-                midAngle,
-                innerRadius,
-                outerRadius,
-                value,
-                name,
-              }) => {
-                const RADIAN = Math.PI / 180;
-                // eslint-disable-next-line
-                const radius = 25 + innerRadius + (outerRadius - innerRadius);
-                // eslint-disable-next-line
-                const x = cx + radius * Math.cos(-midAngle * RADIAN);
-                // eslint-disable-next-line
-                const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-                return (
-                  <text
-                    x={x}
-                    y={y}
-                    className="fill-muted-foreground text-xs"
-                    textAnchor={x > cx ? "start" : "end"}
-                    dominantBaseline="central"
-                  >
-                    {name} ({value}%)
-                  </text>
-                );
-              }}
+              labelLine={false}
+              label={false}
             />
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
