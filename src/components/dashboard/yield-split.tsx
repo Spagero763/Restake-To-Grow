@@ -1,6 +1,6 @@
 "use client";
 
-import { Pie, PieChart } from "recharts";
+import { Pie, PieChart, LabelList } from "recharts";
 
 import {
   Card,
@@ -62,7 +62,15 @@ export function YieldSplit() {
               nameKey="name"
               innerRadius={60}
               strokeWidth={5}
-            />
+              labelLine={false}
+            >
+              <LabelList
+                dataKey="split"
+                position="inside"
+                formatter={(value: number) => `${value}%`}
+                className="fill-primary-foreground text-sm font-medium"
+              />
+            </Pie>
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
               className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
