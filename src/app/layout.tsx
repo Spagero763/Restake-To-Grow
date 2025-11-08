@@ -1,18 +1,16 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { AppContextProvider } from '@/contexts/app-context';
 import { Toaster } from '@/components/ui/toaster';
+import { Providers } from '@/providers';
 
 export const metadata: Metadata = {
   title: 'RestakeToGrow',
   description: 'Restake your assets to grow your yield and fund new projects.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en" className="dark">
       <head>
@@ -21,10 +19,12 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <AppContextProvider>
-          {children}
-          <Toaster />
-        </AppContextProvider>
+        <Providers>
+          <AppContextProvider>
+            {children}
+            <Toaster />
+          </AppContextProvider>
+        </Providers>
       </body>
     </html>
   );
