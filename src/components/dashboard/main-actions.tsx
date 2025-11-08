@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import {
@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { useAccount } from "wagmi";
 
 const GlassCard = (props: React.ComponentProps<typeof Card>) => (
     <Card {...props} className="border-border/50 bg-card/60 backdrop-blur-sm" />
@@ -52,6 +53,7 @@ export function MainActions() {
   const [isWithdrawing, setIsWithdrawing] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
   const [activeTab, setActiveTab] = useState("deposit");
+  const { isConnected } = useAccount();
   
   const depositForm = useForm<z.infer<typeof DepositSchema>>({
     resolver: zodResolver(DepositSchema),
@@ -108,6 +110,19 @@ export function MainActions() {
       withdrawForm.reset();
     }, 2000);
   };
+
+  if (!isConnected) {
+    return (
+      <GlassCard>
+        <CardHeader>
+          <CardTitle>Vault Actions</CardTitle>
+          <CardDescription>
+            Please connect your wallet to deposit or withdraw assets.
+          </CardDescription>
+        </CardHeader>
+      </GlassCard>
+    )
+  }
 
   return (
     <GlassCard>
