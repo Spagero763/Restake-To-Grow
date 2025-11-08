@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Rocket, Menu, Wallet } from "lucide-react";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAppContext } from "@/contexts/app-context";
 import { cn } from "@/lib/utils";
+import { Connect } from "../Connect";
 
 
 const NavLink = ({ href, children, className }: { href: string; children: React.ReactNode, className?: string }) => {
@@ -63,9 +64,7 @@ export function AppHeader() {
             <Label htmlFor="dev-mode">Dev Mode</Label>
           </div>
           <div className="hidden md:block">
-            <Button>
-              <Wallet className="mr-2 h-4 w-4" /> Connect Wallet
-            </Button>
+            <Connect />
           </div>
           <Sheet>
             <SheetTrigger asChild>
@@ -84,9 +83,7 @@ export function AppHeader() {
                   {navLinks}
                 </nav>
                 <div className="border-t pt-6 space-y-6">
-                   <Button className="w-full">
-                     <Wallet className="mr-2 h-4 w-4" /> Connect Wallet
-                   </Button>
+                   <Connect />
                   <div className="flex items-center justify-between">
                     <Label htmlFor="dev-mode-mobile">Dev Mode</Label>
                     <Switch
